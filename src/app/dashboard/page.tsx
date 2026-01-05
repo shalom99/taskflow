@@ -8,6 +8,7 @@ import prisma from "@/lib/prisma";
 
 
 
+
 export default async function DashboardPage() {
   const data = await getData();
   const users = await prisma.user.count();
