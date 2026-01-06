@@ -12,7 +12,7 @@ import prisma from "@/lib/prisma";
 export default async function DashboardPage() {
   const data = await getData();
   const users = await prisma.user.count();
-  console.log(users)
+
   return (
     <div className="p-5 min-h-screen flex flex-col gap-y-5">
       <header className="flex justify-between">
