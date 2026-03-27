@@ -6,11 +6,12 @@ import { DataTable } from "./data-table";
 import { getData } from "./mock-data";
 import { prisma } from "@/lib/prisma";
 import { columns } from "./columns";
+import CreateTaskDialog from "./create/create-task-dialog";
 
 export default async function DashboardPage() {
-  const data = await getData();
-  const users = await prisma.user.count();
-  console.log(users)
+//   const data = await getData();
+//   const users = await prisma.user.count();
+//   console.log(users)
 
     return (
         <div className="p-5 min-h-screen flex flex-col gap-y-5">
@@ -34,13 +35,14 @@ export default async function DashboardPage() {
 
                 <div className="flex gap-x-2">
                     <Button variant="outline">View</Button>
-                    <Button variant="default">Add Task</Button>
+                 
+                    <CreateTaskDialog />
                 </div>
             </div>
 
             <div>
                 Main content
-                <DataTable columns={columns} data={data} />
+                {/* <DataTable columns={columns} data={data} /> */}
             </div>
 
             <footer className="flex justify-between">
