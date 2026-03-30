@@ -2,16 +2,15 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ModeToggle } from "@/components/ui/mode-toggle";
-import { DataTable } from "./data-table";
-import { getData } from "./mock-data";
-import { prisma } from "@/lib/prisma";
-import { columns } from "./columns";
-import CreateTaskDialog from "./create/create-task-dialog";
+
+import { CreateTaskDialog } from "@/app/tasks/_components/create-task-dialog";
+import { TaskList } from "@/app/tasks/_components/task-list";
+import { getTasks } from "../../actions/task";
+
 
 export default async function DashboardPage() {
-//   const data = await getData();
-//   const users = await prisma.user.count();
-//   console.log(users)
+const userId = 1 // replace with session user later
+const tasks = await getTasks(userId) 
 
     return (
         <div className="p-5 min-h-screen flex flex-col gap-y-5">
@@ -42,7 +41,7 @@ export default async function DashboardPage() {
 
             <div>
                 Main content
-                {/* <DataTable columns={columns} data={data} /> */}
+               <TaskList tasks={tasks} />
             </div>
 
             <footer className="flex justify-between">
