@@ -23,8 +23,14 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
+import { Task } from "../../../../generated/prisma/client"
 
-export function EditTaskDialog({ task }) {
+type EditTaskDialogProps = {
+  task: Task  
+}
+
+
+export function EditTaskDialog({ task }: EditTaskDialogProps) {
   const [open, setOpen] = useState(false)
 
   const {
@@ -36,12 +42,11 @@ export function EditTaskDialog({ task }) {
     defaultValues: {
       title: task.title,
       description: task.description ?? "",
-      dueDate: task.dueDate?.slice(0, 10),
+      dueDate: task.createdAt.toISOString().slice(0, 10),
     },
   })
 
   async function onSubmit(values: CreateTaskInput) {
-
 
     const promise = updateTask(task.id, values)
     toast.promise(promise, {
@@ -61,7 +66,7 @@ export function EditTaskDialog({ task }) {
         <Button size="sm" variant="outline">Edit</Button>
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent aria-describedby="UpdateTaskDialog">
         <DialogHeader>
           <DialogTitle>Edit Task</DialogTitle>
         </DialogHeader>

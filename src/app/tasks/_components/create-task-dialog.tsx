@@ -26,6 +26,7 @@ import { toast } from "sonner"
 
 export function CreateTaskDialog() {
   const [open, setOpen] = useState(false)
+  
 
   const {
     register,
@@ -36,6 +37,7 @@ export function CreateTaskDialog() {
   })
 
   async function onSubmit(values: CreateTaskInput) {
+    
 
     const promise = createTask(values)
     toast.promise(promise, {
@@ -66,7 +68,7 @@ export function CreateTaskDialog() {
           {/* Title */}
           <div>
             <Label>Title</Label>
-            <Input {...register("title")} />
+            <Input {...register("title")} disabled={isSubmitting}/>
             {errors.title && (
               <p className="text-sm text-red-500">
                 {errors.title.message}

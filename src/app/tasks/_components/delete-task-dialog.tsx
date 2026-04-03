@@ -12,15 +12,19 @@ import {
   DialogTrigger,
   DialogFooter,
   DialogClose,
+  DialogDescription,
 } from "@/components/ui/dialog"
 
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 
-export function DeleteTaskDialog({ taskId }) {
-  const [open, setOpen] = useState(false)
+type DeleteTaskDialogProps = {
+  taskId: number
+}
 
-  
+export function DeleteTaskDialog({ taskId } : DeleteTaskDialogProps) {
+  const [open, setOpen] = useState(false)
+ 
   async function handleDelete() {
     const promise = deleteTask(taskId)
     toast.promise(promise, {
@@ -44,9 +48,9 @@ export function DeleteTaskDialog({ taskId }) {
         <DialogHeader>
           <DialogTitle>Delete Task</DialogTitle>
         </DialogHeader>
-
-        <p>Are you sure you want to delete this task?</p>
-
+          <DialogDescription>
+            Are you sure you want to delete this task? This action cannot be undone.
+          </DialogDescription>
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
